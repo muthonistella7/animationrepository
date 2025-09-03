@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Animation Result</title>
+</head>
+<body>
+    <h1>Animation Result</h1>
+    <p>Bible Verse: <span th:text="${verse}"></span></p>
+    <p>Cartoon Script: <span th:text="${script}"></span></p>
+    <video width="320" height="240" controls>
+        <source th:src="@{${animationUrl}}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <br>
+    <a href="/">Back</a>
+</body>
+</html>
