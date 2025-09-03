@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AnimationController {
     @Autowired
     private AnimationRepository animationRepository;
+    @Autowired
+    private AnimationService animationService;
     @GetMapping("/")
     public String home() {
         return "Bible Cartoon Animation API";
@@ -18,17 +20,9 @@ public class AnimationController {
 
     @PostMapping("/generate")
     public Animation generateAnimation(@RequestParam("verse") String verse) {
-        // Generate cartoon script from Bible verse
-        String script = "Cartoon animation for: " + verse;
-        String animationUrl = "/sample-animation.mp4";
-
-        // Save to MongoDB
-        Animation animation = new Animation();
-        animation.setVerse(verse);
-        animation.setScript(script);
-        animation.setAnimationUrl(animationUrl);
+        // Use AnimationService to generate video
+        Animation animation = animationService.generateFromVerse(verse);
         animationRepository.save(animation);
-
         return animation;
     }
 }
